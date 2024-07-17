@@ -17,8 +17,8 @@ const URL = process.env.MONGO_URL;
 mongoose
   .connect(URL)
   .then(() => {
-    console.log("Connected to MongoDB");
     app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+    console.log("Connected to MongoDB");
   })
   .catch((error) => console.log(error));
 
