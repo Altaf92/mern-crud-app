@@ -59,7 +59,7 @@ export const update = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(id, req.body, {
       new: true,
     });
-    res.status(200).json(updatedUser);
+    res.status(200).json({ msg: "User deleted successfully" });
   } catch (error) {
     res.status(500).json({ msg: "api error", error: error });
   }

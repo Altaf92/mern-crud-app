@@ -17,6 +17,17 @@ const GetUser = () => {
     fetchData();
   }, []);
 
+  const deleteUser = async (userId) => {
+    await axios
+      .delete(`http://localhost:8080/api/delete/${userId}`)
+      .then((response) => {
+        setUsers((prevUser) => prevUser.filter((user) => user._id !== userId));
+        console.log(response);
+        alert("User deleted successfully!");
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
       <div className="container m-5 mx-auto">
@@ -55,12 +66,18 @@ const GetUser = () => {
                         <td>{user.email}</td>
                         <td>{user.password}</td>
                         <td>
-                          <Link to="update" className="text-warning fs-4">
+                          <Link
+                            to={`/update/${user._id}`}
+                            className="text-warning fs-4"
+                          >
                             <FaEdit />
                           </Link>
                         </td>
                         <td>
-                          <button className="text-danger">
+                          <button
+                            className="text-danger"
+                            onClick={() => deleteUser(user._id)}
+                          >
                             <MdDeleteForever />
                           </button>
                         </td>
